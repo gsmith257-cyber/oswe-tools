@@ -114,7 +114,7 @@ if __name__ == '__main__':
         print(r)
 
     while True:
-        query = raw_input("> ").strip()
+        query = input("> ").strip()
         try:
             s = get_string(temp, query, boolean)  # boolean-based
             #s = get_string_by_error(temp_error, query) # error-based
